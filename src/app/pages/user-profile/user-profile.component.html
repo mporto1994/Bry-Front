@@ -1,0 +1,20 @@
+<div class="user-profile">
+  <h2>Perfil do Usuário</h2>
+  <div class="user-info">
+    <p><strong>Nome:</strong>
+      <span *ngIf="!editMode">{{ user.name }}</span>
+      <input *ngIf="editMode" type="text" [(ngModel)]="user.name" placeholder="Digite o nome">
+    </p>
+    <p><strong>CPF:</strong> {{ user.cpf }}</p>
+    <p><strong>Foto:</strong> <img [src]="user.image" alt="Foto do Usuário"></p>
+  </div>
+  <div class="user-actions">
+    <button (click)="enableEdit()">
+      <i class="fa fa-edit"></i> {{ editMode ? 'Cancelar Edição' : 'Editar Nome e Foto' }}
+    </button>
+    <button (click)="deleteUser()">
+      <i class="fa fa-trash"></i> Excluir Usuário
+    </button>
+    <button *ngIf="editMode" (click)="saveChanges()">Salvar Alterações</button>
+  </div>
+</div>

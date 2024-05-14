@@ -1,0 +1,52 @@
+<div class="container">
+  <form *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="inputDiv">
+      <label for="name">Nome:</label>
+      <input type="text" id="name" formControlName="name" required>
+      <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+        <span class="error" *ngIf="userForm.get('name')?.hasError('required')">Name is required</span>
+      </div>
+    </div>
+
+    <div class="inputDiv">
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" formControlName="cpf" required maxlength="14" (input)="formatCPF($event)">
+      <div *ngIf="userForm.get('cpf')?.invalid && userForm.get('cpf')?.touched">
+        <span class="error" *ngIf="userForm.get('cpf')?.hasError('required')">CPF is required</span>
+        <span class="error" *ngIf="userForm.get('cpf')?.hasError('cpf')">Invalid CPF</span>
+      </div>
+    </div>
+
+    <div class="inputDiv ImageDiv">
+      <label for="image">Imagem:</label>
+      <div class="upload-container">
+        <input type="file" id="image" style="display: none;" (change)="onFileSelected($event)" accept="image/*">
+        <label for="image" class="upload-button">Carregar</label>
+      </div>
+      <div *ngIf="userForm.get('image')?.invalid && userForm.get('image')?.touched">
+        <span class="error" *ngIf="userForm.get('image')?.hasError('required')">A URL da imagem é obrigatória</span>
+      </div>
+    </div>
+
+
+
+    <!-- <div class="inputDiv">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required>
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <span class="error" *ngIf="userForm.get('email')?.hasError('required')">Email is required</span>
+        <span class="error" *ngIf="userForm.get('email')?.hasError('email')">Invalid email format</span>
+      </div>
+    </div> -->
+
+    <!-- <div class="inputDiv">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" required>
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <span class="error" *ngIf="userForm.get('password')?.hasError('required')">Password is required</span>
+      </div>
+    </div> -->
+
+    <button type="submit" [disabled]="userForm.invalid">Registrar</button>
+  </form>
+</div>
